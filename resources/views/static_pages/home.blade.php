@@ -12,7 +12,7 @@
         一切，将在这里开始！
     </p>
     <p>
-        <a href="#" class="btn btn-lg btn-success">
+        <a href="{{route('signup')}}" class="btn btn-lg btn-success">
             现在注册
         </a>
     </p>
