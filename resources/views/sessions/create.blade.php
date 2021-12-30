@@ -25,6 +25,16 @@
                 </div>
 
                 <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" name="remember" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label"
+                        for="rememberMe">
+                            记住我
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <button class="btn btn-primary" type="submit">登录</button>
                 </div>
             </form>
