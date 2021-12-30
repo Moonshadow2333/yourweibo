@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    protected $table = 'users';
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -41,4 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function gravatar($size='100'){
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return "https://cdn.sep.cc/avatar/$hash?s=$size";
+    }
 }
