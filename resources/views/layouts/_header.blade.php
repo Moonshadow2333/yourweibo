@@ -19,7 +19,7 @@
                     <form action="{{route('logout')}}" method="post">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
-                        <button class="btn btn-danger" type="submit">删除</button>
+                        <button class="btn btn-danger" type="submit">退出</button>
                     </form>
                 </li>
                 @else
