@@ -29,3 +29,7 @@ a {
   max-width: 50px;
   border-radius: 50%;
 }
+
+.btn-primary{
+    margin: 10px 0px;
+}
