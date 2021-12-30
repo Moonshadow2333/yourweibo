@@ -24,7 +24,7 @@ class SessionsController extends Controller
 
     }
     public function destroy(){
-        return view('');
+        return '退出成功';
     }
 
 }
