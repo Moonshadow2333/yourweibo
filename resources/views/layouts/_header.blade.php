@@ -11,7 +11,7 @@
                     <a href="#" class="nav-link">个人中心</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('users.edit',Auth::user())}}" class="nav-link">
                         编辑资料
                     </a>
                 </li>
