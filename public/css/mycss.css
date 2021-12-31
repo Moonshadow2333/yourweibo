@@ -33,3 +33,7 @@ a {
 .btn-primary{
     margin: 10px 0px;
 }
+
+.delete-btn{
+    float: right;
+}
