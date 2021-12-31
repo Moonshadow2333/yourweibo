@@ -10,6 +10,6 @@ class Status extends Model
     protected $fillable = ['content'];
     use HasFactory;
     public function user(){
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(User::class);
     }
 }
