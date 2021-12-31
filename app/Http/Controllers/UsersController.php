@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use Mail;
 class UsersController extends Controller
 {
     public function __construct(){
         $this->middleware('auth',[
-            'except' => ['store','create','show ','index']
+            'except' => ['store','create','show ','index','confirmEmail']
         ]);
                 $this->middleware('guest',[
             'only' => ['create']
@@ -32,9 +33,9 @@ class UsersController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
-        Auth::login($user);
+        $this->sendEmailConfirmationTo($user);
         session()->flash('success','欢迎，您将在这里开启一段新的旅程！');
-        return redirect()->route('users.show',[$user]);
+        return redirect()->route('home');
     }
     public function edit(User $user){
         $this->authorize('update',$user);
@@ -62,5 +63,25 @@ class UsersController extends Controller
         $user->delete();
         session()->flash('success','删除用户成功');
         return back();
+    }
+    public function sendEmailConfirmationTo($user){
+        $view = 'emails.confirm';
+        $data = compact('user');
+        $from = '1815265375@qq.com';
+        $name = 'MoonShadow2333';
+        $to = $user->email;
+        $subject = '感谢注册 Weibo 应用！请确认您的邮件。';
+        Mail::send($view,$data,function($message) use ($from, $name, $to, $subject){
+            $message->from($from,$name)->to($to)->subject($subject);
+        });
+    }
+    public function confirmEmail($token){
+        $user = User::where('activation_token',$token)->firstOrFail();
+        $user->activated = true;
+        $user->activation_token = null;
+        $user->save();
+        Auth::login($user);
+        session()->flash('success','恭喜你，激活成功');
+        return redirect()->route('users.show',[$user]);
     }
 }
