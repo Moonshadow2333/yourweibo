@@ -8,7 +8,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">个人中心</a>
+                    <a href="{{route('users.show',Auth::user())}}" class="nav-link">个人中心</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('users.edit',Auth::user())}}" class="nav-link">
