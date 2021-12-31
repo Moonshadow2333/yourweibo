@@ -12,6 +12,9 @@ class UsersController extends Controller
         $this->middleware('auth',[
             'except' => ['store','create','show ','index','confirmEmail']
         ]);
+        $this->middleware('throttle:10,60',[
+            'only' => ['store']
+        ]);
                 $this->middleware('guest',[
             'only' => ['create']
         ]);
@@ -67,12 +70,10 @@ class UsersController extends Controller
     public function sendEmailConfirmationTo($user){
         $view = 'emails.confirm';
         $data = compact('user');
-        $from = '1815265375@qq.com';
-        $name = 'MoonShadow2333';
         $to = $user->email;
         $subject = '感谢注册 Weibo 应用！请确认您的邮件。';
-        Mail::send($view,$data,function($message) use ($from, $name, $to, $subject){
-            $message->from($from,$name)->to($to)->subject($subject);
+        Mail::send($view,$data,function($message) use ($to, $subject){
+            $message->to($to)->subject($subject);
         });
     }
     public function confirmEmail($token){
