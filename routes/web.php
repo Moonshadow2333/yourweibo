@@ -37,3 +37,7 @@ Route::post('password/reset',  'PasswordController@reset')->name('password.updat
 
 // 微博的增删改查
 Route::resource('statuses','StatusesController',['only'=>['store','destroy']]);
+
+// 查看粉丝和关注的人
+Route::get('/users/{user}/followings','UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers','UsersController@followers')->name('users.followers');
